@@ -1,0 +1,140 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<a class="url-path-link" href="{% url 'home' %}">&#127968;&nbsp;Home</a> >
+<a class="url-path-link" href="{% url 'category' product.category.pk %}">{{product.category}}</a> >
+{% if product.sub_category %}
+<a class="url-path-link" href="{% url 'sub_category' product.sub_category.pk %}">{{product.sub_category}}</a> >
+{% else %}
+<a class="url-path-link" href="{% url 'other' product.category.pk %}">Other</a> >
+{% endif %}
+<a class="url-path-link" href="{% url 'product' product.pk %}">{{product}}</a>
+<br>
+<br>
+
+<div class="product-header">
+    <p>{{ product.title }} by&nbsp;</p>
+    <a href="{% url 'profile' product.user.pk %}"><p>{{ product.user }}</p></a>
+</div>
+<br>
+
+<div class="product-wrap">
+    <div class="product-images">
+        {% if not product.product_images.count == 0 %}
+            {% for image in product.product_images.all %}
+                <div class="main-container">
+                    <img src="{{ image.image.url }}" alt="/">
+                </div>
+            {% endfor %}
+        {% else %}
+            <br>
+            <h1>This product has no images attached.</h1>
+        {% endif %}
+    </div>
+
+    <div class="product-info">
+        {% if product.is_available %}
+            <div class="available">
+                <p>&#10003; Available</p>
+            </div>
+        {% else %}
+            <div class="unavailable">
+                <p>&#x2716; Unavailable</p>
+            </div>
+        {% endif %}
+
+
+        <div class="price-quantity main-container">
+            <div>
+                <p><b>{{ product.quantity }}</b> available at:</p>
+                <h1>{{ product.price }}$</h1>
+            </div>
+            <div>
+                {% if user == request.user %}
+                    <a class="main-link" href="{% url 'add_images' product.pk %}">Add images</a>
+                {% else %}
+                    <a href="{% url 'add_to_wishlist' product.pk %}"><button class="main-button">Add to wishlist</button></a>
+                {% endif %}
+            </div>
+        </div>
+
+        <hr class="description-hr ">
+
+        <div class="description main-container">
+            <h2>From author:</h2>
+            <p>{{ product.description }}</p>
+        </div>
+
+        {% if product.is_available and product %}
+        <div class="order-form main-container">
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button class="main-button order-button" type="submit">Make an order</button>
+            </form>
+        </div>
+        {% endif %}
+
+        <h1>Questions:</h1>
+        {% if product.product_questions.count != 0 %}
+            <div class="questions-wrap">
+                <div class="questions ">
+                    {% for question in product.product_questions.all %}
+                    <div class="question main-container">
+                        <a href="{% url 'profile' question.user.pk %}" class="question-user">{{ question.user }}:</a>
+                        <p class="question-title">{{ question.title }}</p>
+                        <p class="question-question">{{ question.question }}</p>
+                        {% if question.question_replies %}
+                            <div class="replies">
+                                {% for reply in question.question_replies.all %}
+                                    <div>
+                                        <a href="{% url 'profile' reply.user.pk %}" class="reply-user">{{ reply.user }}:</a>
+                                        <p class="reply-text">{{ reply.text }}</p>
+                                    </div>
+                                {% endfor %}
+                                <a href="{% url 'new_reply' question.pk %}"><button class="main-button">Reply</button></a>
+                            </div>
+                        {% endif %}
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        {% else %}
+        {% endif %}
+        <a href="{% url 'new_question' product.pk %}"><button class="main-button">Ask a question</button></a>
+    </div>
+</div>
+<br>
+<br>
+
+<h2>Similar products</h2>
+<br>
+
+<div class="similar-products">
+    {% for item in product.sub_category.products.all %}
+        <div class="viewed-item main-container">
+            <div class="viewed-image-info">
+                {% if not item.product_images.count == 0 %}
+                    {% with item.product_images.all|first as image %}
+                        <a href="{% url 'product' item.pk %}"><img height="100" width="auto" src="{{ image.image.url }}"></a>
+                    {% endwith %}
+                {% else %}
+                    <a href="{% url 'product' item.pk %}"><img width="100px" src="{% static '/buyerr/images/no-image.png' %}" alt="/"></a>
+                {% endif %}
+                <div class="order-info">
+                    <a class="edit-link" href="{% url 'product' item.pk %}">{{ item }}</a>
+                </div>
+            </div>
+            <br>
+            <br>
+            <div class="viewed-buttons">
+                <a class="main-link" href="{% url 'product' item.pk %}">View</a>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+
+
+
+{% endblock %}

@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block content %}
+<form class="main-form" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <br>
+    <button class="main-button" type="submit">Ask</button>
+    &nbsp;<a class="main-link" href="{% url 'product' product.pk %}">Back</a>
+</form>
+{% endblock %}

@@ -1,0 +1,42 @@
+.selling {
+    width: 100%;
+    display: flex;
+    gap: 20px;
+}
+
+.new-product-form {
+    padding: 10px;
+    height: fit-content;
+}
+
+.user-products-data {
+    flex-basis: 90%;
+    gap: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.user-product {
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+}
+
+.selling-image-info {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.selling-image-info a{
+    text-decoration: none;
+    color: green;
+}
+
+.selling-buttons {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    gap: 10px;
+}

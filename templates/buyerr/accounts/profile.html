@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="profile-wrap">
+
+    {% include '_profile_menu.html' %}
+
+    <div class="profile-data">
+
+        <div class="main-container profile-data-item">
+            <div class="profile-data-item-header">
+                <div class="profile-data-item-header-text">
+                    {% if user.gender %}
+                        <img src="{% static 'buyerr/images/user-male-24.png' %}" alt="male">
+                    {% else %}
+                        <img src="{% static 'buyerr/images/user-female-24.png' %}" alt="male">
+                    {% endif %}
+                    <h2>Personal Data</h2>
+                </div>
+                {% if user == request.user %}
+                    <a class="edit-link" href="{% url 'edit_personal' request.user.pk %}">&#9998;&nbsp;Edit</a>
+                {% endif %}
+            </div>
+            <div class="profile-data-item-info">
+                <div class="user-info-item">
+                    <p class="light-p">Name</p>
+                    <p>{{ object.name }}</p>
+                </div>
+                <div class="user-info-item">
+                    <p class="light-p">Birthday</p>
+                    <p>{{ object.birthday }}</p>
+                </div>
+                <div class="user-info-item">
+                    <p class="light-p">Gender</p>
+                    {% if object.gender %}
+                        <p>Male</p>
+                    {% else %}
+                        <p>Female</p>
+                    {% endif %}
+                </div>
+                <div class="user-info-item">
+                    <p class="light-p">Date Joined</p>
+                    <p>{{ object.date_joined }}</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="main-container profile-data-item">
+            <div class="profile-data-item-header">
+                <div class="profile-data-item-header-text">
+                    <img src="{% static 'buyerr/images/mail-24.png' %}" alt="male">
+                    <h2>Contact Data</h2>
+                </div>
+                {% if user == request.user %}
+                    <a class="edit-link" href="{% url 'edit_contacts' request.user.pk %}">&#9998;&nbsp;Edit</a>
+                {% endif %}
+            </div>
+            <div class="profile-data-item-info">
+                <div class="user-info-item">
+                    <p class="light-p">Phone</p>
+                    <p>{{ object.phone }}</p>
+                </div>
+                <div class="user-info-item">
+                    <p class="light-p">Email</p>
+                    <p>{{ object.email }}</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="main-container profile-data-item">
+            <div class="profile-data-item-header">
+                <div class="profile-data-item-header-text">
+                    <img src="{% static 'buyerr/images/truck-24.png' %}" alt="male">
+                    <h2>Delivery</h2>
+                </div>
+                {% if user == request.user %}
+                    <a class="edit-link" href="{% url 'edit_delivery_location' request.user.pk %}">&#9998;&nbsp;Edit</a>
+                {% endif %}
+            </div>
+            <div class="profile-data-item-info">
+                <div class="user-info-item">
+                    <p class="light-p">Delivery</p>
+                    <p>{{ object.delivery_address }}</p>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="profile-buttons">
+            <a href="#"><button class="main-button">Reset Password</button></a>
+            <a href="{% url 'logout' %}"><button class="main-button">Logout</button></a>
+        </div>
+
+    </div>
+</div>
+
+
+{% endblock %}

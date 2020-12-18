@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="main-container messages-users">
+    {% for user in users %}
+        <div class="main-container messages-user">
+            <a class="edit-link" href="{% url 'private_messages' user.pk %}">{{ user }}</a>
+            <a class="question-user" href="{% url 'delete_all_messages' user.pk %}">Delete Conversation</a>
+        </div>
+    {% endfor %}
+</div>
+
+{% endblock %}

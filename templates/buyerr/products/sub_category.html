@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<a class="url-path-link" href="{% url 'home' %}">&#127968;&nbsp;Home</a> >
+<a class="url-path-link" href="{% url 'category' category.pk %}">{{category}}</a> >
+<a class="url-path-link" href="{% url 'sub_category' sub_category.pk %}">{{sub_category}}</a>
+<br>
+<br>
+
+{% for product in products %}
+    <div class="main-container wishlist-item">
+        <div class="item-image-info">
+            {% if not product.product_images.count == 0 %}
+                {% with product.product_images.all|first as image %}
+                    <a href="{% url 'product' product.pk %}"><img height="40" width="auto" src="{{ image.image.url }}"></a>
+                {% endwith %}
+            {% else %}
+                <a href="{% url 'product' product.pk %}"><img height="40" src="{% static '/buyerr/images/no-image.png' %}" alt="/"></a>
+            {% endif %}
+            <p><a class="edit-link" href="{% url 'product' product.pk %}">{{ product.title }}</a></p>
+        </div>
+    </div>
+<br>
+{% endfor %}
+{% endblock %}

@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="search-wrap">
+    <div class="search-sidebar main-container">
+        <ul>
+            <li>
+                <form class="search-form-mini" method="get">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <br>
+                    <button class="main-button" type="submit">Search</button>
+                </form>
+            </li>
+        </ul>
+    </div>
+
+        <div class="search-results">
+        {% if products %}
+        {% for product in products %}
+            <div class="viewed-item main-container">
+                <div class="viewed-image-info">
+                    {% if not product.product_images.count == 0 %}
+                        {% with product.product_images.all|first as image %}
+                            <img height="100" width="auto" src="{{ image.image.url }}">
+                        {% endwith %}
+                    {% else %}
+                        <img width="100px" src="{% static '/buyerr/images/no-image.png' %}" alt="/">
+                    {% endif %}
+                    <div class="order-info">
+                        <a class="edit-link" href="{% url 'product' product.pk %}">{{ product }}</a>
+                        <b>{{product.price}}$</b>
+                    </div>
+                </div>
+                <br>
+                <div class="viewed-buttons">
+                    <a class="main-link" href="{% url 'product' product.pk %}">View</a>
+                </div>
+            </div>
+        {% endfor %}
+        {% else %}
+            <h1>No result</h1>
+        {% endif %}
+        </div>
+    </div>
+
+{% endblock %}

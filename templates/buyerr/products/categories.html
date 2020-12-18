@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<a class="url-path-link" href="{% url 'home' %}">&#127968;&nbsp;Home</a>
+<br>
+<br>
+
+<b>&nbsp;All categories</b>
+<br>
+<br>
+
+{% for category in categories %}
+<div class="category-wrap">
+    <img src="{{category.image.url}}" alt="/">
+    <a href="{% url 'category' category.pk %}">{{ category.title }}</a>
+</div>
+{% endfor %}
+<br>
+
+{% if request.user.is_staff %}
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <br>
+        <button class="main-button" type="submit">Add</button>
+    </form>
+{% endif %}
+
+
+{% endblock %}

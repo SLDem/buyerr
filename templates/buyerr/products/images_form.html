@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block content %}
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <br>
+    <button class="main-button" type="submit">Add</button>&nbsp;<a href="{% url 'selling' request.user.pk %}"><button class="main-button">Skip</button></a>
+</form>
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="profile-wrap">
+    {% include '_profile_menu.html' %}
+    {% if viewed_items %}
+    <div class="viewed-items">
+        {% for item in viewed_items %}
+            <div class="viewed-item main-container">
+                <div class="viewed-image-info">
+                    {% if not item.product.product_images.count == 0 %}
+                        {% with item.product.product_images.all|first as image %}
+                            <a href="{% url 'product' item.product.pk %}"><img height="100" width="auto" src="{{ image.image.url }}"></a>
+                        {% endwith %}
+                    {% else %}
+                        <a href="{% url 'product' item.product.pk %}"><img width="100px" src="{% static '/buyerr/images/no-image.png' %}" alt="/"></a>
+                    {% endif %}
+                    <div class="order-info">
+                        <a class="edit-link" href="{% url 'product' item.product.pk %}">{{ item.product }}</a>
+                    </div>
+                </div>
+                <br>
+                <br>
+                <br>
+                <div class="viewed-buttons">
+                    <a class="main-link" href="{% url 'delete_viewed' item.pk %}">Remove</a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+</div>
+
+
+{% endblock %}

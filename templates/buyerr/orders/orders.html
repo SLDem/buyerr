@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="profile-wrap">
+    {% include '_profile_menu.html' %}
+
+    <div class="order-data">
+        {% for order in orders %}
+            <div class="main-container order-container">
+                <div class="order-image-info">
+                    {% if not order.product.product_images.count == 0 %}
+                        {% with order.product.product_images.all|first as image %}
+                            <img height="100" width="auto" src="{{ image.image.url }}">
+                        {% endwith %}
+                    {% else %}
+                        <img width="100px" src="{% static '/buyerr/images/no-image.png' %}" alt="/">
+                    {% endif %}
+                    <div class="order-info">
+                        <a href="{% url 'product' order.product.pk %}">{{ order.product }}</a>
+                        <p>{{ order.quantity }} in basket.</p>
+                    </div>
+                </div>
+
+                <div class="order-buttons">
+                    <a href="{% url 'delete_order' order.pk %}"><button class="main-button">Delete</button></a>&nbsp;
+                    <a href="{% url 'checkout_session' order.pk %}"><button class="main-button">Confirm</button></a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+
+{% endblock %}

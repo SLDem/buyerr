@@ -1,0 +1,59 @@
+<html>
+<head>
+    {% load static %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://js.stripe.com/v3/"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'buyerr/main.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'buyerr/profile.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'buyerr/products.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'buyerr/orders.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'buyerr/selling.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'buyerr/wishlist.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'buyerr/viewed.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'buyerr/reviews.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'buyerr/messages.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'buyerr/auth.css' %}">
+    <title>buyerr</title>
+</head>
+<body>
+    <div class="navbar">
+        <ul class="nav-ul">
+            {% if request.user.is_authenticated %}
+                <li><a href="{% url 'profile' request.user.pk %}">{{ request.user.name }}</a></li>
+                <li><a href="{% url 'home' %}">Home</a></li>
+                <li><a href="{% url 'messages' %}">Messages</a></li>
+            {% else %}
+            <li><a href="{% url 'login' %}">Login</a></li>
+            <li><a href="{% url 'signup' %}">Signup</a></li>
+            {% endif %}
+        </ul>
+        <ul class="nav-ul-middle">
+            <li>
+                <form action="{% url 'search_results' %}" class="search-form" method="get">
+                    <input id="text" type="text" name="query">
+                    <button class="search-button" type="submit">&#128269;</button>
+                </form>
+            </li>
+        </ul>
+        <ul class="nav-ul-right">
+            <li><a href="/admin">admin</a></li>
+        </ul>
+    </div>
+    <div class="content-wrap">
+        {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+                {% if message.tags %}
+                    <li class="message">{{ message }}</li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+        {% endif %}
+
+        {% block content %}
+        {% endblock %}
+    </div>
+<script src="{% static 'buyerr/scripts.js' %}"></script>
+</body>
+</html>
+

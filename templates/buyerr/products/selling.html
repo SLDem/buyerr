@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="profile-wrap">
+    {% include '_profile_menu.html' %}
+    <div class="selling">
+
+        <div class="user-products-data">
+            {% for product in products %}
+                <div class="main-container user-product">
+                    <div class="selling-image-info">
+                        <div>
+                            {% if not product.product_images.count == 0 %}
+                                {% with product.product_images.all|first as image %}
+                                    <img height="70" width="auto" src="{{ image.image.url }}">
+                                {% endwith %}
+                            {% else %}
+                                <img height="70" src="{% static '/buyerr/images/no-image.png' %}" alt="/">
+                            {% endif %}
+                        </div>
+                        <div>
+                            <a href="{% url 'product' product.pk %}">{{ product.title }}(<b style="color: grey;">{{ product.price }}$</b>)</a>
+                            <p>{{ product.quantity }}</p>
+                            <b>{{ product.category }} |
+                            {% if product.sub_category %}
+                                {{ product.sub_category }}
+                            {% else %}
+                                Other
+                            {% endif %}
+                            </b>
+                        </div>
+                    </div>
+                    <div class="selling-buttons">
+                        {% if user == request.user %}
+                            <a href="{% url 'add_images' product.pk %}"><button class="main-button">Add Images</button></a>
+                            <a href="{% url 'update_product' product.pk %}"><button class="main-button">Update</button></a>
+                            <a href="{% url 'delete_product' product.pk %}"><button class="main-button">Delete</button></a>
+                        {% endif %}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+        {% if user == request.user %}
+            <div class="main-container new-product-form">
+                <h2>New Product</h2>
+                <form class="main-form" id="productForm" method="post" data-sub-categories-url="{% url 'load_sub_categories' %}" novalidate>
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <br>
+
+                    <button class="main-button" type="submit">Add</button>
+                </form>
+            </div>
+        {% endif %}
+
+    </div>
+</div>
+
+
+{% endblock %}

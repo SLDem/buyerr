@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="profile-wrap">
+    {% include '_profile_menu.html' %}
+    <div class="wishlist">
+        {% if wishlist_items %}
+            {% for item in wishlist_items %}
+                <div class="main-container wishlist-item">
+                    <div class="item-image-info">
+                        {% if not item.product.product_images.count == 0 %}
+                            {% with item.product.product_images.all|first as image %}
+                                <a href="{% url 'product' item.product.pk %}"><img height="40" width="auto" src="{{ image.image.url }}"></a>
+                            {% endwith %}
+                        {% else %}
+                            <a href="{% url 'product' item.product.pk %}"><img height="40" src="{% static '/buyerr/images/no-image.png' %}" alt="/"></a>
+                        {% endif %}
+                        <p><a class="edit-link" href="{% url 'product' item.product.pk %}">{{ item.product.title }}</a></p>
+                    </div>
+                    <div class="wishlist-buttons">
+                        <h1>{{ item.product.price }}$</h1>
+                        <a href="{% url 'delete_wishlist_item' item.pk %}" class="main-link">Delete</a>
+                    </div>
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+</div>
+
+
+{% endblock %}

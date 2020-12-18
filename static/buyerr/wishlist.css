@@ -1,0 +1,26 @@
+.wishlist {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+}
+
+.wishlist-item {
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    align-items: center;
+}
+
+.item-image-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.wishlist-buttons {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}

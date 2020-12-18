@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<a class="url-path-link" href="{% url 'home' %}">&#127968;&nbsp;Home</a> >
+<a class="url-path-link" href="{% url 'category' category.pk %}">{{category}}</a>
+<br>
+<br>
+
+{% for subcategory in sub_categories %}
+    <div class="category-wrap">
+        <a href="{% url 'sub_category' subcategory.pk %}">| {{ subcategory }}</a><br>
+    </div>
+{% endfor %}
+<br>
+<a style="text-decoration: none; color: #53BEF4;" href="{% url 'other' category.pk %}">| Other</a><br>
+{% endblock %}

@@ -1,0 +1,22 @@
+.viewed-items {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
+.viewed-item {
+    width: 200px;
+    height: fit-content;
+    max-width: 200px;
+    min-width: 200px;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    align-items: center;
+}
+
+.viewed-image-info {
+    text-align: center;
+    padding: 10px;
+}

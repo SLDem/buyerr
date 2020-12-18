@@ -1,0 +1,55 @@
+{% load static %}
+<div class="profile-menu">
+    <ul class="main-container profile-menu-options">
+        <li>
+            <img src="{% static 'buyerr/images/profile.png' %}" alt="/">
+            <p><a href="{% url 'profile' user.pk %}">Profile</a></p>
+        </li>
+        <li>
+            <img src="{% static 'buyerr/images/selling.png' %}" alt="/">
+            <p><a href="{% url 'selling' user.pk %}">Selling</a></p>
+        </li>
+        {% if user == request.user %}
+        <li>
+            <img src="{% static 'buyerr/images/orders.png' %}" alt="/">
+            <p><a href="{% url 'orders' request.user.pk %}">Orders</a></p>
+        </li>
+        <li>
+            <img src="{% static 'buyerr/images/wishlist.png' %}" alt="/">
+            <p><a href="{% url 'wishlist' request.user.pk %}">Wishlist</a></p>
+        </li>
+        <li>
+            <img src="{% static 'buyerr/images/viewed.png' %}" alt="/">
+            <p><a href="{% url 'viewed' request.user.pk %}">Viewed</a></p>
+        </li>
+        <li>
+            <img src="{% static 'buyerr/images/credit.png' %}" alt="/">
+            <p><a href="{% url 'bought' request.user.pk %}">Bought</a></p>
+        </li>
+        {% endif %}
+        <li>
+            <img src="{% static 'buyerr/images/reviews.png' %}" alt="/">
+            <p><a href="{% url 'reviews' user.pk %}">Reviews</a></p>
+        </li>
+    </ul>
+
+    <br>
+    <div class="main-container rating-container">
+        {{ user.rating }}
+        {% if your_rating %}
+            ({{ your_rating.value }})
+        {% endif %}
+        {% if user != request.user and request.user.is_authenticated %}
+        <div class="votes">
+            <a href="{% url 'leave_rating' user.pk 1 %}"> &#9734;</a>
+            <a href="{% url 'leave_rating' user.pk 2 %}"> &#9734;</a>
+            <a href="{% url 'leave_rating' user.pk 3 %}"> &#9734;</a>
+            <a href="{% url 'leave_rating' user.pk 4 %}"> &#9734;</a>
+            <a href="{% url 'leave_rating' user.pk 5 %}"> &#9734;</a>
+        </div>
+
+        {% endif %}
+    </div>
+
+</div>
+

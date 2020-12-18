@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block content %}
+<form class="main-form" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <br>
+    <button class="main-button" type="submit">Save</button>&nbsp;<a href="{% url 'profile' request.user.pk %}"><button class="main-button">Cancel</button></a>
+</form>
+<br>
+
+{% endblock %}

@@ -1,0 +1,27 @@
+.private-message {
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.message-input {
+    padding: 10px;
+    resize: none;
+    width: 100%;
+    height: 50px;
+}
+
+.messages-users {
+    padding: 10px;
+    gap: 20px;
+}
+
+.messages-user {
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row;
+}

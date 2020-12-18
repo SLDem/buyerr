@@ -1,0 +1,40 @@
+.order-data {
+    flex-basis: 90%;
+    gap: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.order-buttons {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.order-buttons a {
+    height: 44px;
+}
+
+.order-container {
+    padding: 10px;
+    gap: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.order-container a {
+    text-decoration: none;
+    color: green;
+}
+
+.order-image-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.order-info {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}

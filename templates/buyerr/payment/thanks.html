@@ -1,0 +1,6 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<p>Thanks</p>
+<a href="{% url 'bought' request.user.pk %}">View Bough Items</a>
+{% endblock %}

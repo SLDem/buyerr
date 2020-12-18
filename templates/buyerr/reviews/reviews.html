@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="profile-wrap">
+    {% include '_profile_menu.html' %}
+    <div class="reviews">
+        <div class="profile-reviews-header">
+            <p>{{ user }} reviews.</p>
+        </div>
+        {% if reviews %}
+            {% for review in reviews %}
+                <div class="main-container review">
+                    <div class="review-author-delete">
+                        <a class="edit-link" href="{% url 'profile' review.author.pk %}">{{ review.author }}</a>
+                        {% if request.user == review.author %}
+                            <a href="{% url 'delete_review' review.pk %}"><button class="main-button">Delete</button></a>
+                        {% endif %}
+                    </div>
+                    <br>
+                    <p class="review-t">OVERALL</p>
+                    <p>{{ review.text }}</p>
+                    <p class="review-p">PLUSES</p>
+                    <p>{{ review.pluses }}</p>
+                    <p class="review-m">MINUSES</p>
+                    <p>{{ review.minuses }}</p>
+                </div>
+            {% endfor %}
+        {% endif %}
+        {% if not user == request.user %}
+        <div class="new-review-form-wrap main-container">
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <br>
+                <button class="main-button">Write</button>
+            </form>
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}

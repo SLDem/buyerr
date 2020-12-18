@@ -1,0 +1,82 @@
+.profile-reviews-header {
+    border: 3px solid green;
+    border-radius: 5px;
+    background-color: #F2FFEC;
+    color: #22550A;
+    padding: 10px;
+}
+
+.reviews {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+}
+
+.review {
+    padding: 10px;
+}
+
+.review-t {
+    color: grey;
+}
+
+.review-p {
+    color: #4BD20B;
+}
+
+.review-m {
+    color: red;
+}
+
+.new-review-form-wrap {
+    width: 400px;
+    padding: 10px;
+}
+
+.review-text-input {
+    display: flex;
+    align-items: center;
+    width: 400px;
+    height: 70px;
+    resize: none;
+    margin-bottom: 20px;
+    padding: 10px;
+}
+
+.review-text-input::label {
+    color: grey;
+}
+
+.review-pluses-input {
+    display: flex;
+    align-items: center;
+    width: 400px;
+    height: 70px;
+    resize: none;
+    margin-bottom: 20px;
+    padding: 10px;
+}
+
+.review-pluses-input::placeholder {
+    color: #4BD20B;
+}
+
+.review-minuses-input {
+    display: flex;
+    align-items: center;
+    width: 400px;
+    height: 70px;
+    resize: none;
+    padding: 10px;
+}
+
+.review-minuses-input::placeholder {
+    color: red;
+}
+
+.review-author-delete {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}

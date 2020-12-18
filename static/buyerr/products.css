@@ -1,0 +1,167 @@
+.product-wrap {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.product-header {
+    display: flex;
+    align-items: center;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.product-header a {
+    color: green;
+    text-decoration: none;
+}
+
+.product-images {
+    flex-basis: 40%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.product-images img {
+    width: 100%;
+    height : auto;
+}
+
+.product-info {
+    flex-basis: 60%;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.available {
+    color: green;
+    border-radius: 10px;
+    background-color: #F0F0F0;
+    width: 140px;
+    padding: 5px;
+    text-align: center;
+}
+
+.unavailable {
+    color: red;
+    border-radius: 10px;
+    background-color: #F0F0F0;
+    width: 160px;
+    padding: 5px;
+    text-align: center;
+}
+
+.price-quantity {
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.description-hr {
+    border-color: #D3FFC0;
+    width: 80%;
+    margin: 20 auto;
+}
+
+.description, .order-form {
+    padding: 10px;
+}
+
+
+.replies {
+    margin-left: 40px;
+    margin-top: 20px;
+    border-left: 1px solid lightgrey;
+    padding-left: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.question-title-input, .question-question-input  {
+    width: 100%;
+    padding: 5px;
+    resize: none;
+}
+
+.order-button {
+    width: 197px;
+}
+
+.questions {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.question {
+    padding: 10px;
+}
+
+.question-user {
+    font-size: 20px;
+    font-weight: bold;
+    text-decoration: none;
+    color: #404040;
+}
+
+.question-user:hover {
+    color: #707070;
+}
+
+.question-title {
+    border-bottom: 1px solid grey;
+    padding-bottom: 5px;
+    font-size: 15px;
+}
+
+.question-question {
+    font-size: 14px;
+}
+
+.reply-user {
+    font-size: 17px;
+    font-weight: bold;
+    text-decoration: none;
+    color: #404040;
+}
+
+.reply-user:hover {
+    color: #707070;
+}
+
+.reply-text {
+    font-size: 14px;
+}
+
+.url-path-link {
+    text-decoration: none;
+    color: green;
+}
+
+.category-wrap {
+    padding: 5px 0;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.category-wrap a {
+    text-decoration: none;
+    color: green;
+}
+
+.similar-products {
+    display: flex;
+    gap: 20px;
+}
+
+select {
+    width: 100%;
+}

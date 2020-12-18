@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Messages with <a class="edit-link" href="{% url 'profile' user.pk %}">{{ user }}</a></h2>
+<br>
+
+{% if messages %}
+    {% for message in messages %}
+    <div class="main-container private-message">
+        <div>
+            <p><a class="reply-user" href="{% url 'profile' message.sender.pk %}">{{ message.sender }}</a></p>
+            <p>{{ message.text }}</p>
+        </div>
+        <a class="reply-user" href="{% url 'delete_message' message.pk %}">Delete</a>
+    </div>
+    <br>
+    {% endfor %}
+{% endif %}
+
+<form class="main-form" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <br>
+    <button class="main-button" type="submit">Send</button>
+</form>
+
+{% endblock %}
